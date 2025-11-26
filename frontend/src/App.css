@@ -695,6 +695,7 @@ td {
   padding: 16px;
   border-bottom: 1px solid #e5e7eb;
   font-size: 15px;
+  color: #1f2937;
 }
 
 tbody tr:hover {
@@ -703,6 +704,21 @@ tbody tr:hover {
 
 tbody tr.highlighted {
   background: #eff6ff;
+}
+
+/* Ensure all table text is readable */
+table td {
+  color: #1f2937 !important;
+}
+
+table td.positive {
+  color: #059669 !important;
+  font-weight: 600;
+}
+
+table td.negative {
+  color: #dc2626 !important;
+  font-weight: 600;
 }
 
 .warning-box {
