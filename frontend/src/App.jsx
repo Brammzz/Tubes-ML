@@ -53,14 +53,28 @@ function App() {
   };
 
   const preprocessData = (rawData) => {
-    const processed = rawData.slice(-60).map((row, idx) => ({
-      tanggal: row.date || `Hari ${idx + 1}`,
-      open: parseFloat(row.open),
-      close: parseFloat(row.close),
-      high: parseFloat(row.high),
-      low: parseFloat(row.low),
-      volume: parseInt(row.volume || 0)
-    })).filter(row => !isNaN(row.open) && !isNaN(row.close));
+    // Ambil 30 data terakhir dan tampilkan setiap 2 hari untuk mengurangi crowding
+    const recent = rawData.slice(-30);
+    const processed = recent
+      .filter((row, idx) => idx % 2 === 0) // Tampilkan setiap 2 hari
+      .map((row, idx) => {
+        // Format tanggal yang lebih pendek
+        let displayDate = row.date || `Day ${idx + 1}`;
+        if (row.date && row.date.includes('-')) {
+          const parts = row.date.split('-');
+          displayDate = `${parts[2]}/${parts[1]}`; // DD/MM format
+        }
+        
+        return {
+          tanggal: displayDate,
+          open: parseFloat(row.open),
+          close: parseFloat(row.close),
+          high: parseFloat(row.high),
+          low: parseFloat(row.low),
+          volume: parseInt(row.volume || 0)
+        };
+      })
+      .filter(row => !isNaN(row.open) && !isNaN(row.close));
 
     const opens = processed.map(d => d.open);
     const closes = processed.map(d => d.close);
@@ -293,17 +307,17 @@ function App() {
               />
             </label>
             
-            {apiStatus !== 'connected' && (
-              <div className="warning-message">
-                ⚠️ Backend API tidak tersedia. Pastikan server Python berjalan di localhost:8000
-              </div>
-            )}
-            
             {file && (
               <div className="success-message">
                 ✅ File berhasil diupload: <strong>{file.name}</strong>
                 <br />
                 📊 Data telah diproses oleh backend untuk training model
+              </div>
+            )}
+            
+            {apiStatus !== 'connected' && (
+              <div className="warning-message">
+                ⚠️ Backend API tidak tersedia. Pastikan server Python berjalan di localhost:8000
               </div>
             )}
 
@@ -351,13 +365,20 @@ function App() {
 
             <div className="chart-container">
               <h3>Grafik Pergerakan Harga (60 Hari Terakhir)</h3>
-              <ResponsiveContainer width="100%" height={400}>
-                <LineChart data={data}>
+              <ResponsiveContainer width="100%" height={450}>
+                <LineChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 10 }}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="tanggal" angle={-45} textAnchor="end" height={80} />
-                  <YAxis />
+                  <XAxis 
+                    dataKey="tanggal" 
+                    angle={-45} 
+                    textAnchor="end" 
+                    height={120}
+                    interval="preserveStartEnd"
+                    tick={{ fontSize: 11, fill: '#374151' }}
+                  />
+                  <YAxis tick={{ fontSize: 12 }} />
                   <Tooltip />
-                  <Legend />
+                  <Legend wrapperStyle={{ paddingTop: '20px' }} />
                   <Line type="monotone" dataKey="open" stroke="#3b82f6" strokeWidth={2} name="Open" />
                   <Line type="monotone" dataKey="close" stroke="#8b5cf6" strokeWidth={2} name="Close" />
                   <Line type="monotone" dataKey="high" stroke="#10b981" strokeWidth={1} strokeDasharray="5 5" name="High" />

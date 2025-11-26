@@ -281,10 +281,15 @@ body {
   background: #d1fae5;
   border: 2px solid #6ee7b7;
   border-radius: 12px;
-  display: inline-block;
+  display: block;
   color: #065f46;
   font-size: 16px;
   line-height: 1.6;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .warning-message {
@@ -293,10 +298,15 @@ body {
   background: #fef3c7;
   border: 2px solid #fbbf24;
   border-radius: 12px;
-  display: inline-block;
+  display: block;
   color: #92400e;
   font-size: 16px;
   font-weight: 600;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .info-box {
@@ -383,6 +393,10 @@ body {
 .chart-container {
   margin-bottom: 40px;
   width: 100%;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .chart-container h3 {
@@ -390,6 +404,16 @@ body {
   color: #1f2937;
   margin-bottom: 20px;
   font-weight: 600;
+}
+
+/* Recharts responsive container fix */
+.recharts-wrapper {
+  padding-bottom: 20px !important;
+}
+
+/* Fix for XAxis labels */
+.recharts-cartesian-axis-tick-value {
+  font-size: 12px !important;
 }
 
 .stats-grid {
