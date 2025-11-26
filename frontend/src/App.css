@@ -31,62 +31,10 @@ body {
   padding: 0 20px;
 }
 
-/* API Status */
-.api-status {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: white;
-  padding: 12px 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  z-index: 1000;
-  border: 2px solid;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.api-status.connected {
-  border-color: #10b981;
-  color: #065f46;
-}
-
-.api-status.disconnected {
-  border-color: #ef4444;
-  color: #991b1b;
-}
-
-.api-status.unknown {
-  border-color: #6b7280;
-  color: #374151;
-}
-
-.status-indicator {
-  font-size: 16px;
-}
-
-.retry-button {
-  background: #ef4444;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.retry-button:hover {
-  background: #dc2626;
-}
-
 /* Error Alert */
 .error-alert {
   position: fixed;
-  top: 80px;
+  top: 20px;
   right: 20px;
   background: #fef2f2;
   border: 2px solid #fca5a5;

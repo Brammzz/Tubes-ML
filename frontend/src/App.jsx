@@ -213,22 +213,6 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* API Status Indicator */}
-      <div className={`api-status ${apiStatus}`}>
-        <span className="status-indicator">
-          {apiStatus === 'connected' ? '🟢' : apiStatus === 'disconnected' ? '🔴' : '⚪'}
-        </span>
-        <span className="status-text">
-          {apiStatus === 'connected' ? 'Backend Connected' : 
-           apiStatus === 'disconnected' ? 'Backend Disconnected' : 'Checking...'}
-        </span>
-        {apiStatus === 'disconnected' && (
-          <button onClick={checkApiHealth} className="retry-button">
-            🔄 Retry
-          </button>
-        )}
-      </div>
-
       {/* Error Alert */}
       {error && (
         <div className="error-alert">
